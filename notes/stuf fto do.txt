@@ -1,0 +1,53 @@
+IMPORTANT
+
+picking up items
+iTEM MENU USAGE and dropping items
+Turn ntimer
+Enemies
+Weapon UI
+Create Levels
+Add items on ground
+Implement tools
+Create more interactable structures
+5 frames for every leftover 10 frames gets carried over turns
+replace the stuff in scr_highliught board with scr_checkcollision
+scrap scr_sight stuff and redoo all of it
+add terrain that you can slide through
+
+making stuff less laggy
+make a code to convert from a designer to a level maker
+REMEMBE RTO PUT SCR_HIGHLIGHTBOARD WHENEVER THERES AN INPUT OR CHANGE IN STATE
+make tall objects affect your sight
+make everything faster look in scr_sightlines
+add in constant sight
+add the way that the unit is fixing
+add facing for movement only for nonplayer
+fix check collision and kicking enemies to detect specifically walls and other units
+1. let you use the arrows keys to move and attack
+1. fix the order of which action taken does things in conjunction with player action
+1. add end turn button 
+1. have bullets work from different directions
+DO THE ARRAY FOR TILES REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+4. make it so that bullets track everyspace they moved through in a list
+6. bullets prime after 1 turn/move
+8. add bullet atributes like going through wallss
+9. add middle click drag
+10. have player automatically crouch behind walls after turn end
+11 add a time limit to turn
+if two walls are next to each other comine them
+add items
+add weapon functions
+sight and darkness
+status effects
+enemy personalities
+big stuff
+if sprites aren't image index based you can have the tile draw the things on top of themselves
+
+
+
+
+make it not lag if theres too many squares being highlighted**********
+Lesser tweaks
+1. make it so that when you click a space directly in the middle to move, it doesn't also click the character
+and close up the character portrait
+s

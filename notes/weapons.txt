@@ -1,0 +1,12 @@
+
+
+
+
+1 = Shotgun
+
+
+weaponcooldowntime = -1;
+
+
+clips = -1 = non needed infinite reloads
+clips = -2 = charge

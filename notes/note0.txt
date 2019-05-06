@@ -1,0 +1,28 @@
+characters can shoot and charge shot
+
+time moves slow for main characters
+specific amount of turns until time police tghing arrives they slow time too
+shifts between two universes
+trying to stay stealthy
+main people besides time police have a hard time hurting you so as long as you sneak through them its fine
+
+
+remember to restric tthe max size of the camera
+
+make the camera better fol;low invisible incs style of camera
+
+
+
+displacement 
+playerx = tilex + 
+
+have all enemies move at once
+
+boss 1 - deactivates everything + items tests fundamentals
+
+people have shields
+
+
+
+bulet direction
+ 

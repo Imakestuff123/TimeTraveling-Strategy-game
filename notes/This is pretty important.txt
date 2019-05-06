@@ -1,0 +1,299 @@
+Instance variables
+Objects:
+	obj_management {
+		Lists:
+			Maptilelist - A list that stores every tile that is created in scr_createmap
+			Projectilelist - A list that stores every projectile object that is created
+			unitlist - A list that stores every unit
+			meleelist - A list that stores all melee attacks
+			techlist - A list of all the techniques that the player has
+			interactionlist - a list of all the interactions that a player can do
+
+		arays:
+			attackcdr - the cooldowns of each attack, (created every new room)
+			techcdr - the cooldowns of each tech
+		Variables:
+			TurnFrames - The number of frames that the player gets every turn
+			Frames - The number of frames that the player has to use in their turn
+			dispalyingprofile - The specific id of the unit that's profile is being displayed
+			startingclips - the number of clips a unit starts with
+			lastmousex - the x value of the mouse the frame before
+			lastmousey - the y value of the mouse the frame before
+			mapsizex - How many tiles on the x this map is
+			mapsizey - How many tiles on the y this map is
+			mapstartx - the x value of the first top left tile
+			mapstarty - the y value of the first top left tile
+			introbannertimer - the timer that tracks the animation of the banner animation when a turn starts
+			meleecount - the current melee attack selected, and current movement tech selected
+			
+		var Variables:
+			(in step event and draw event)
+				cx - The camera's x
+				cy - The camera's y
+				cw - The Camera's width
+				ch - The camera's height
+			(in draw event) 
+				mousettile - The specific tile that the mouse is touching at that speciifc frame
+				
+	}
+	obj_floortile {
+		Variables:
+			Impassable - 1 means that the tile is impassable
+			Tiletype - The type of tile that it is
+			tilex - the x value of the tile on the tilemap
+			tiley - the y value of the tile on the tilemap		
+			insight - 
+				0 - no sight
+				1 - in player sight
+				2 - in enemy sight
+		var Variables:
+			(in step event)
+				mover - the id of the unit that is moving (chooses obj_management.displayingprofile)
+				calculatedtiles - The amount of tiles that is calculated to be moving
+				xchange - The amount of tiles that is changed on the x axis(tilex - mover.tilex)
+				ychange - The amount of tiles that is change on the y axis (tiley - mover.tiley)
+	}	
+	obj_player {
+		Lists:
+			statuseffects - the status effects
+			sightlist - tracks all the tiles that is in the unit's site
+		Variables:
+			spriteset - the spriteset that is being used for that unit
+			Agility - the agility stat 
+			Senlevel - The sen level
+			Techlevel - the tech level
+			ObjectType - The type of unit (player and enemy)
+			Weapon - the Weapon that is being used by that unit
+			Clips - the amount of clips 
+			MaxAmmo - the amount of ammo every clip gives when reloaed
+			Weaponreloadtime - the amount of frames the weapon takes to be reloaded
+			Weaponcooldowntime - the cooldown betweereen each shot
+			tilex - the x value of the unit on the tilemap
+			tiley - the y value of the unit on the tilemap
+			Ammo - the amount of ammo you have
+			Enemytype - the type of enemy that the unit is (-1 if player)
+			Weaponcooldown - The number of frames that the weeapon cannot fire
+			UnitState - The current movement state of the unit 
+			/*
+			0 - standing
+			1 - crouching 
+			*/
+			Health - Unit's Health
+			Shield - Unit's Shield
+			MaxShield - The max regeneration of the shield
+			sightpattern - the tiles which the unit can see
+			ddirection - the direction in which the unit is facing
+		Var variables:
+			threshhold - the amount of frames needed dfor the selected melee attack.
+	}
+	obj_bullet {
+		Variables:
+			bullettype - The type of bullet (pertaining to weapon)
+			tilex - the x value of the bullet on the tilemap
+			tiley - the y value fo teh bullet on the tilemap
+			ddirection - the direction that the bullet is facing and moving
+			movespeed - the amount of tiles moved every 5 frames
+			Turnsstillprimed - The amount of 5 frame intervals that it takes the bullet to prime after shot
+			Turnsleft - the amount of 5 frame intervals that the bullet will exist
+			bulleteffect - the effect that bullet has
+	}
+
+Scripts:
+	scr_drawtext(transcriptionstring, xx, yy, timesbigx, timesbigy, fonttype, color, alpha) {
+		var Variables:
+			transcriptionstring = the string that wants to be displayed
+			xx = the x of the position tha the string will be displayed
+			yy = the y of the position that the string will be displayed
+			timesbigx = the size multiplyer of the length of the text
+			timesbigy = the size multiplayer of the width of the text
+			fonttype = the sprite that will be used as the display
+			lettercheck = a variable used to refer to the character at a specific point of the string in the forloop
+			font_index = the specific image_index value of a specific character in the sprite
+		Objects that call this script (doesn't really matter because only setting var variables):
+			- any
+	}
+	scr_createmap(mapsizex, mapsizey, mapstartx, mapstarty) {
+		Array:
+			currentmap[x, y] - holds the tiletype of that specific coordinate
+		Variables used:
+			Variables set:
+				mapsizex - How many tiles on the x this map is
+				mapsizey - How many tiles on the y this map is
+				mapstartx - the x value of the first top left tile
+				mapstarty - the y value of the first top left tile
+		Objects that call this script:
+			- obj_management
+	}
+	scr_createunit(tilex, tiley, preset, spriteset, stats, ObjectType, Weapon, Enemytype, sightpattern, starting facing) {
+		var Variables:
+			tilex - the x value in the tilemap of the tile that the unit starts on 
+			tiley - the y value in the tilemap of the tile that the unit starts on
+			preset - whether the all the variables are part of a set (0 if not preset)
+			spriteset - the spriteset that will be used for the unit
+			stats - a string that is sepaated into the stats
+			ObjectType - whether the unit is a player or a enemy or their type of enemy
+			Weapon - the weapon of the unit
+			Enemytype - the type of enemy the unit is (-1 = player) 
+			unit - the id of the unit that is being created
+			sightpattern - the sight pattern of the unit
+			startingdirection - the direction that the unit is facing when created
+		Objects that call this script:
+			obj_management
+	}
+	scr_actiontaken(actiontype, number of 5 frame intervals) {
+		var Variables:
+			xtrack - the x movement of bullets
+			ytrack - the y movement of bullets
+			actiontype - the action that is taken when the script is called
+	}
+	scr_createbullet(bullettype, bullettilex, bullettiley, bulletdirection) {
+		var Variables:
+			bullettype - the type of bullet beging shot
+			bullettilex - the x value in the tilemap of the tile that the bullet starts on
+			bullettiley - the y value in the tilemap of the tile that the bullet starts on
+			bullet - the referense to the id of the bullet
+	}
+
+Global Variables:
+
+	- global.Gamestate
+		0 - Menus
+		1 - Player input time
+		2 - Animation time
+		
+
+
+	- global.TurnState
+		first digit
+		0 - neither turn
+		1 - player turn
+		2 - enemy turn
+		3 - Item Menu
+		
+		second digit for player turn
+		0 - Choosing options
+		1 - movement selection
+		2 - Attacking selection
+		3 - Shooting selection
+		4 - waiting
+		5 - tech section
+		6 - interact section
+		7 - item selection menu section
+		8 - item usage section
+	- global.showsight 
+		0 - doesn't show sight
+		1 - shows sight tiles
+
+	
+
+Implementing stuff
+	Creating an attack:
+		go to meleelist in this file and add the stats in
+		scr_highlightboard
+		go to obj_floortile and put in the cooldown of the attack
+		go to obj_floortile and fill in what happens when attack is used
+		
+		meleelist:
+			/*
+				0 - punch (no shield, 1 hp, 5 frames, no push, no status effect) 0 frame cdr but uses more frames per punch
+				1 - kick (no shield, 1 hp, 10 frames, push 1 back, no status effect) 10 frame cdr
+			*/
+		
+	Creating tech:
+		scr_highlightboard
+		go to obj_floortile and put in the cooldown of the tech
+		go to obj_floortile and fill in what happens when tech is used
+		
+		techlist:
+			/*
+				0 - slide (move one tile, cost 5 frames) 20 frame cdr
+				1 - hop (hop over short tile, cost 20 frames) 30 frame cdr
+				2 - Dash (Basically teleport 3 tiles in a stright line if there is no wall in the way, can cross pits, costs 20 frames) 50 frame cdr
+			*/
+			
+	Creating new terrain
+		scr_checkgamestate for cover
+		go into obj_management draw function and decide how to display tiletype
+		scr_createmap 
+		scr_sightlines if they block sight
+		scr_highlightboard
+		scr_action taken for if bullet goes into tall enough terrain
+		scr_highlightboard if the terrain is short
+		scr_checkcollision
+		Tiletypes:
+			/*
+			-1 = depth tile
+			0 = normal tile
+			1 = short wall tile face right - can be shot over 
+			2 = closed door tile face right - can be opened, acts as a normal wall
+			3 = open door tile - can be closed, acts as a clear space that can't have anything dragged through
+			4 = closed door tile face left
+			5 = opened door tile face left
+			6 = tall wall
+			*/
+		
+	Creating a status effect
+	scr_checkgamestate
+	scr_playerturnstart
+	scr_enemyturnstart
+	scr_actiontaken
+		1 - Concentrated (+10 frames every turn) Only Player
+		2 - Dazed (-10 frames every turn) Only Player 
+		
+		
+	Creating new Weapon	
+		go into obj_management draw function drawing wepaon region
+		go into scr_createunit and switch the weapons
+		
+		Weapons:
+			0 = regular laser gun 
+				ammo - 6/6 
+				movementspeed - 1 tile every 5 frames
+				damage - 1 shield
+				Recuire clips - Yes
+				weaponreloadtime = 5 frames
+				sprite - spr_regularlaser
+				Weapon actions 
+					- reload
+				firing modes
+					- semi
+				disappearingtime - 50 frames
+				priming time - 0 frames
+				Weaponcooldowntime = 15 frames
+
+	Creating a new interaction
+		go into obj_floortile code in what happens when a tile is clicked based on such
+		scr_highlightboard
+		obj_management add it to interactionlist
+		Interactions:
+			0 - open/close door (cost 5 frames)
+			1 - pick up item (cost 5 frames)
+
+	Creating a sight pattern
+		go to scr_sightlines
+	
+	Sight patterns:
+		1 - 90 degree viewing pattern
+		2 - 180 degree viewing pattern
+		3 - 360 degree viewing pattern
+	
+	Items
+	go into obj_management and set how it is drawn
+	scr_createmap
+	obj_itemmenu draw
+		1 - green keycard
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
