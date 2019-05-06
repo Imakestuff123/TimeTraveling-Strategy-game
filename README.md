@@ -22,4 +22,3 @@ Mit License
 
 - Atlus - I used one of the sprites from Shin Megami tensei devil survivor
 
-## Controls
