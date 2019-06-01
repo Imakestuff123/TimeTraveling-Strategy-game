@@ -60,7 +60,7 @@ if (tilexin + xchange <= obj_management.mapsizex) && (tileyin + ychange <= obj_m
 			break;
 	}	
 	//if unit collision matters
-	for (var i = 0; i <= ds_list_size(obj_management.unitlist); i++) {
+	/*for (var i = 0; i <= ds_list_size(obj_management.unitlist); i++) {
 		var unit = ds_list_find_value(obj_management.unitlist, i);
 		if (unit.tilex == currenttile.tilex) && (unit.tiley == currenttile.tiley) {
 			switch (whattypeofcol) {
@@ -69,7 +69,7 @@ if (tilexin + xchange <= obj_management.mapsizex) && (tileyin + ychange <= obj_m
 					break;
 			}
 		}
-	}
+	}*/
 }
 
 
